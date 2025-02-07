@@ -44,19 +44,19 @@ def delete_task(task_id):
     if task:
         dbsession.delete(task)
         dbsession.commit()
-        print(f" Task {task_id} has been deleted")
+        print(f" Task {task_id} has been deleted. One less thing to postpone now.")
     else:
-        print("Task not found")
+        print("💀 Task does not exist, were you imagining it?")
 
 def complete_task(task_id):
     task = dbsession.get(Task, task_id)
     if task:
         task.completed = True
         dbsession.commit()
-        print(f"Task {task_id} marked done")
+        print(f"Task {task_id} marked done, really? Never thought you'd complete that one!")
 
     else:
-        print("Task does not exist")
+        print("💀 Task does not exist, were you imagining it?")
 
 
 if len(sys.argv) > 1:
@@ -70,7 +70,7 @@ if len(sys.argv) > 1:
     elif action == "done":
         complete_task(int(sys.argv[2]))
     else:
-        print("I don't understand")
+        print("I don't understand. Try again!")
 
 else:
     print("Usage: python main.py [add|list] [task description]")
