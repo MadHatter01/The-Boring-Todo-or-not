@@ -31,12 +31,32 @@ def add_task(description):
 def list_tasks():
     tasks = dbsession.query(Task).all()
     if not tasks:
-        print(f"Nothing to do")
+        print(f"Nothing to do, wow so fun -_-")
         return
     
     for task in tasks:
         status = "done" if task.completed else "todo"
         print(f"[{status}] {task.id} : {task.description}")
+
+
+def delete_task(task_id):
+    task = dbsession.get(Task, task_id)
+    if task:
+        dbsession.delete(task)
+        dbsession.commit()
+        print(f" Task {task_id} has been deleted")
+    else:
+        print("Task not found")
+
+def complete_task(task_id):
+    task = dbsession.get(Task, task_id)
+    if task:
+        task.completed = True
+        dbsession.commit()
+        print(f"Task {task_id} marked done")
+
+    else:
+        print("Task does not exist")
 
 
 if len(sys.argv) > 1:
@@ -45,6 +65,12 @@ if len(sys.argv) > 1:
         add_task(" ".join(sys.argv[2:]))
     elif action == "list":
         list_tasks()
+    elif action == "delete":
+        delete_task(int(sys.argv[2]))
+    elif action == "done":
+        complete_task(int(sys.argv[2]))
+    else:
+        print("I don't understand")
 
 else:
     print("Usage: python main.py [add|list] [task description]")
