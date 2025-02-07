@@ -61,13 +61,13 @@ def complete_task(task_id):
 
 if len(sys.argv) > 1:
     action = sys.argv[1]
-    if action == "add":
+    if action == "add" and len(sys.argv) > 2:
         add_task(" ".join(sys.argv[2:]))
     elif action == "list":
         list_tasks()
-    elif action == "delete":
+    elif action == "delete" and len(sys.argv) > 2:
         delete_task(int(sys.argv[2]))
-    elif action == "done":
+    elif action == "done" and len(sys.argv) > 2:
         complete_task(int(sys.argv[2]))
     else:
         print("I don't understand. Try again!")
