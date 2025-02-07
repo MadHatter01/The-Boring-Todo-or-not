@@ -1,4 +1,4 @@
-## ✍🏻 The Boring TODO ever
+## ✍🏻 The most Boring TODO ever
 
 Manage your tasks in the terminal!
 With this **CLI-based task tracker**, you can:  
